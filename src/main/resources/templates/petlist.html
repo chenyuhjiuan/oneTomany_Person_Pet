@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <div th:replace="base::head"></div>
+
+    <nav id="nav_bar">
+        <ul id="navmenu">
+            <li><a class="current" href="/">Home</a></li>
+            <li ><a href="/personlist">Persons' Information</a></li>
+            <li><a href="/petlist">Pets' Information</a></li>
+            <li><a href="/addperson">Add Persons</a></li>
+            <li><a href="/addpet">Add Pets</a></li>
+        </ul>
+    </nav><br/>
+
+    <div style="width: 1000px;margin-left: 300px;" class="row">
+<h1  >Pet List</h1>
+<table class="content-table">
+<thead>
+    <tr>
+        <th>Pet Name&nbsp;&nbsp;</th>
+        <th>Pet Color</th>
+    </tr>
+</thead>
+<tbody>
+    <tr th:each="pet : ${pets}">
+        <td th:text="${pet.name}"></td>
+        <td th:text="${pet.color}"></td>
+        <td th:text="${pet.person.name}"></td>
+        <td>
+
+            <a th:href="@{/update_pet/{id}(id=${pet.id})}">Update</a>
+
+            <a th:href="@{/detail_pet/{id}(id=${pet.id})}">Details</a>
+
+            <a th:href="@{/delete_pet/{id}(id=${pet.id})}">Delete</a>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+    </div>
+</html>

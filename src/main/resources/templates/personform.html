@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <div th:replace="base::head"></div>
+
+    <nav id="nav_bar">
+        <ul id="navmenu">
+            <li><a class="current" href="/">Home</a></li>
+            <li ><a href="/personlist">Persons' Information</a></li>
+            <li><a href="/petlist">Pets' Information</a></li>
+            <li><a class="current" href="/addperson">Add Persons</a></li>
+            <li><a href="/addpet">Add Pets</a></li>
+        </ul>
+    </nav><br/>
+
+    <div style="width: 1000px;margin-left: 300px;" class="row">
+    <h1 >Person Form</h1>
+
+    <form action="#" th:action="@{/processperson}" th:object="${person}" method="post">
+
+        <input type="hidden" th:field="*{id}" />
+
+        Person Name:&nbsp;<input type="text" th:field="*{name}" />
+
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        <br>
+        Person Hobby:&nbsp;<input type="text" th:field="*{hobby}" />
+
+        <span th:if="${#fields.hasErrors('hobby')}" th:errors="*{hobby}"></span>
+        <br>
+        <input type="submit" value="Submit" />
+
+    </form>
+    </div>
+    <div th:replace="base::footer"></div>
+</body>
+
+</html>

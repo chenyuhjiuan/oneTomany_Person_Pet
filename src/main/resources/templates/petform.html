@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <div th:replace="base::head"></div>
+
+    <nav id="nav_bar">
+        <ul id="navmenu">
+            <li><a class="current" href="/">Home</a></li>
+            <li ><a href="/personlist">Persons' Information</a></li>
+            <li><a href="/petlist">Pets' Information</a></li>
+            <li><a href="/addperson">Add Persons</a></li>
+            <li><a href="/addpet">Add Pets</a></li>
+        </ul>
+    </nav><br/>
+
+    <div style="width: 1000px;margin-left: 300px;" class="row">
+<h1>Pet Form</h1>
+
+<form action="#" th:action="@{/processpet}" th:object="${pet}" method="post">
+
+    <input type="hidden" th:field="*{id}" />
+
+    Pet Name:&nbsp;<input type="text" th:field="*{name}" />
+
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">&nbsp;&nbsp;</span><br/>
+
+    Pet Color:&nbsp;<input type="text" th:field="*{color}" />
+
+    <span th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></span>
+
+    <br>
+
+    Person:&nbsp;<select name="person" th:field="*{person}">
+
+    <option th:each="person : ${persons}"
+
+            th:value="${person.id}"
+
+            th:text="${person.name}"></option>
+
+</select>
+
+    <br>
+
+    <input type="submit" value="Submit">
+
+</form>
+    </div>
+</body>
+
+</html>

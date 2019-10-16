@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <div th:replace="base::head"></div>
+
+    <nav id="nav_bar">
+        <ul id="navmenu">
+            <li><a class="current" href="/">Home</a></li>
+            <li ><a href="/personlist">Persons' Information</a></li>
+            <li><a href="/petlist">Pets' Information</a></li>
+            <li><a href="/addperson">Add Persons</a></li>
+            <li><a href="/addpet">Add Pets</a></li>
+        </ul>
+    </nav><br/>
+
+    <div style="width: 1000px;margin-left: 300px;" class="row">
+
+<table class="content-table">
+    <tr>
+        <th>Perosn Name&nbsp;</th>
+
+    </tr>
+
+    <tr th:each="person : ${persons}">
+        <td th:text="${person.name}"></td>
+        <td>
+            <a th:href="@{/update_person/{id}(id=${person.id})}">Update</a>
+            <a th:href="@{/detail_person/{id}(id=${person.id})}">Details</a>
+            <a th:href="@{/delete_person/{id}(id=${person.id})}">Delete</a>
+        </td>
+    </tr>
+</table>
+<br/>
+<div th:each="person:${persons}">
+    <h2 th:text="${person.name}"></h2><br/><br/>
+
+
+    <ul>
+        <br/>
+        <th:block th:each="pet:${person.pets}">
+            <li th:inline="text"><b>[[${pet.name}]]: </b>[[${pet.color}]]</li>
+        </th:block><br/>
+    </ul>
+
+<br/>
+</div>
+        <br/><br/>
+    </div>
+<div th:replace="base::footer"></div>
+</body>
+
+</html>
